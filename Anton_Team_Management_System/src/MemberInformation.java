@@ -103,7 +103,7 @@ public class MemberInformation extends JFrame implements ActionListener {
 
 		imagePanel.add(jp4, BorderLayout.NORTH);
 
-		Table_Data();
+		tableData();
 
 		jp_s.add(scroll);
 		jp_s.setOpaque(false);
@@ -139,14 +139,14 @@ public class MemberInformation extends JFrame implements ActionListener {
 			new Add(username);
 		} else if (comm.equals(ButtonString[2])) {
 			jp_s.remove(scroll);
-			Table_Data();
+			tableData();
 			jp_s.add(scroll);
 			jp_s.validate();
 			jf.validate();
 		}
 	}
 
-	public void Table_Data() {
+	public void tableData() {
 		// 采用自定义数据模型
 		model = new MyTableModel();
 		table = new JTable(model);
@@ -582,7 +582,7 @@ public class MemberInformation extends JFrame implements ActionListener {
 					e7.printStackTrace();
 				}
 				jp_s.remove(scroll);
-				Table_Data();
+				tableData();
 				jp_s.add(scroll);
 				jp_s.validate();
 				jf.validate();

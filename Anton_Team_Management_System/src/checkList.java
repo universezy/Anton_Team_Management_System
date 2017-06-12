@@ -36,7 +36,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 @SuppressWarnings("serial")
-public class CheckList extends JFrame implements ActionListener {
+public class checkList extends JFrame implements ActionListener {
 	private JFrame jf;
 	public String username;
 	private int jf_width = 1150, jf_height = 620, jt_width = 490, jt_height = 125, rowHeight = 20;
@@ -46,8 +46,8 @@ public class CheckList extends JFrame implements ActionListener {
 	@SuppressWarnings("rawtypes")
 	private JComboBox jcb_list;
 	private JButton jb_open, jb_delete, jb_upload;
-	private Table_Model1 model1 = null, model2 = null;
-	private Table_Model2 model3 = null, model4 = null;
+	private TableModel1 model1 = null, model2 = null;
+	private TableModel2 model3 = null, model4 = null;
 	private JScrollPane jsp_table1, jsp_table2, jsp_table3, jsp_table4;
 	private JTable table1 = null, table2 = null, table3 = null, table4 = null;
 	private String[] ButtonString = { "  Open  ", "Delete", "Upload" };
@@ -61,27 +61,27 @@ public class CheckList extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		String comm = arg0.getActionCommand();
 		if (comm.equals(ButtonString[0])) {
-			OpenData();
+			openData();
 		} else if (comm.equals(ButtonString[1])) {
-			DeleteData();
+			deleteData();
 		} else if (comm.equals(ButtonString[2])) {
 			if (!jtfName.getText().equals("")) {
-				Upload();
+				upload();
 			}
 		}
 	}
 
-	public CheckList(String string_username) {
+	public checkList(String string_username) {
 		username = string_username;
 
 		// 数据装载
-		Load_Raid_List();
+		loadRaidList();
 
 		// 布局装载
-		setLayout_All();
+		setLayoutAll();
 	}
 
-	public String[] Load_Raid_List() {
+	public String[] loadRaidList() {
 		File file = new File("res/" + username + "/TeamList");
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
@@ -106,7 +106,7 @@ public class CheckList extends JFrame implements ActionListener {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void setLayout_All() {
+	public void setLayoutAll() {
 		jf = new JFrame("Anton Team Management System —— CheckList");
 		jf.setLayout(new BorderLayout());
 
@@ -253,7 +253,7 @@ public class CheckList extends JFrame implements ActionListener {
 		jlIntercept1.setBounds(0, 0, background_Intercept.getIconWidth(), background_Intercept.getIconHeight());
 		jp_Intercept1.add(jlIntercept1, BorderLayout.NORTH);
 
-		model1 = new Table_Model1();
+		model1 = new TableModel1();
 		table1 = new JTable(model1) {
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -335,7 +335,7 @@ public class CheckList extends JFrame implements ActionListener {
 		jlDestroy1.setBounds(0, 0, background_Destroy.getIconWidth(), background_Destroy.getIconHeight());
 		jp_Destroy1.add(jlDestroy1, BorderLayout.NORTH);
 
-		model2 = new Table_Model1();
+		model2 = new TableModel1();
 		table2 = new JTable(model2) { // 设置jtable的单元格为透明的
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -418,7 +418,7 @@ public class CheckList extends JFrame implements ActionListener {
 		jlIntercept2.setBounds(0, 0, background_Intercept.getIconWidth(), background_Intercept.getIconHeight());
 		jp_Intercept2.add(jlIntercept2, BorderLayout.NORTH);
 
-		model3 = new Table_Model2();
+		model3 = new TableModel2();
 		table3 = new JTable(model3) { // 设置jtable的单元格为透明的
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -499,7 +499,7 @@ public class CheckList extends JFrame implements ActionListener {
 		jlDestroy2.setBounds(0, 0, background_Destroy.getIconWidth(), background_Destroy.getIconHeight());
 		jp_Destroy2.add(jlDestroy2, BorderLayout.NORTH);
 
-		model4 = new Table_Model2();
+		model4 = new TableModel2();
 		table4 = new JTable(model4) { // 设置jtable的单元格为透明的
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -593,7 +593,7 @@ public class CheckList extends JFrame implements ActionListener {
 		jf.pack();
 	}
 
-	public void OpenData() {
+	public void openData() {
 		String Open_path = "res/" + username + "/TeamList/" + jcb_list.getSelectedItem().toString() + ".md";
 		File file = new File(Open_path);
 		if (!file.getParentFile().exists()) {
@@ -603,11 +603,11 @@ public class CheckList extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(jf, // 如果为null，此框架显示在中央，为jf则显示为jf的中央
 					"File doesn't exit !", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
-			OpenFile(file);
+			openFile(file);
 		}
 	}
 
-	public void OpenFile(File file) {
+	public void openFile(File file) {
 		FileReader fr = null;
 		try {
 			fr = new FileReader(file);
@@ -693,7 +693,7 @@ public class CheckList extends JFrame implements ActionListener {
 		}
 	}
 
-	public void DeleteData() {
+	public void deleteData() {
 		String Delete_path = "res/" + username + "/TeamList/" + jtfName.getText() + "_" + jtfDate.getText() + "_"
 				+ jtfTime.getText() + ".md";
 		File file = new File(Delete_path);
@@ -710,14 +710,14 @@ public class CheckList extends JFrame implements ActionListener {
 				System.out.println("Delete : " + Delete_path);
 				file.delete();
 				jf.dispose();
-				new CheckList(username);
+				new checkList(username);
 			} else if (a == JOptionPane.CANCEL_OPTION) {
 
 			}
 		}
 	}
 
-	public void Upload() {
+	public void upload() {
 		JFileChooser jfc = new JFileChooser();
 		jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		jfc.showDialog(new JLabel(), "上传");
@@ -733,14 +733,14 @@ public class CheckList extends JFrame implements ActionListener {
 		try {
 			if (srcFile.exists()) {
 				File destFile = new File("res/" + destFileName + ".jpg");
-				CopyFile(srcFile, destFile);
+				copyFile(srcFile, destFile);
 			}
 		} catch (NullPointerException e) {
 
 		}
 	}
 
-	public void CopyFile(File srcFile, File destFile) {
+	public void copyFile(File srcFile, File destFile) {
 		if (!destFile.exists()) {
 			try {
 				destFile.createNewFile();
@@ -783,7 +783,7 @@ public class CheckList extends JFrame implements ActionListener {
 			fileIndex++;
 			destFileName += "(" + fileIndex + ")";
 			File destFile2 = new File("res/" + destFileName + ".jpg");
-			CopyFile(srcFile, destFile2);
+			copyFile(srcFile, destFile2);
 		}
 	}
 }

@@ -62,8 +62,8 @@ public class TeamEdit extends JFrame implements ActionListener {
 	private JPanel_Background jp_detail_mission;
 	private int jf_width = 2200, jf_height = 1500, MemberString_count = 1;
 	private String[] string_raid_list, MemberString;
-	private Table_Model1 model1 = null, model2 = null;
-	private Table_Model2 model3 = null, model4 = null;
+	private TableModel1 model1 = null, model2 = null;
+	private TableModel2 model3 = null, model4 = null;
 	private boolean toCommit = false;
 	private ImageIcon background_Intercept, background_Destroy;
 
@@ -79,7 +79,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		Load_Raid_List();
 
 		// 布局装载
-		setLayout_All();
+		setLayoutAll();
 	}
 
 	public static void main(String string_username) {
@@ -111,7 +111,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void setLayout_All() {
+	public void setLayoutAll() {
 		jf = new JFrame("Anton Team Management System —— Team Edit");
 		jf.setLayout(new BorderLayout());
 
@@ -227,7 +227,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 
 		MemberString = new String[MemberString_count];
 		MemberString[0] = noMember;
-		Table_Data();
+		tableData();
 
 		// 左边 imagePanel_Intercept
 		jp_table_top_left.setLayout(new BorderLayout());
@@ -298,7 +298,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		JLabel jlMission1 = new JLabel(background_Intercept);
 		jlMission1.setBounds(0, 0, background_Intercept.getIconWidth(), background_Intercept.getIconHeight());
 
-		model3 = new Table_Model2();
+		model3 = new TableModel2();
 		table3 = new JTable(model3) { // 设置jtable的单元格为透明的
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -351,7 +351,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		JLabel jlMission2 = new JLabel(background_Destroy);
 		jlMission2.setBounds(0, 0, background_Destroy.getIconWidth(), background_Destroy.getIconHeight());
 
-		model4 = new Table_Model2();
+		model4 = new TableModel2();
 		table4 = new JTable(model4) { // 设置jtable的单元格为透明的
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -431,21 +431,21 @@ public class TeamEdit extends JFrame implements ActionListener {
 		String comm = e.getActionCommand();
 
 		if (comm.equals(ButtonString[0])) { // open
-			OpenData();
+			openData();
 		} else if (comm.equals(ButtonString[1])) { // new
 			NewData();
 		} else if (comm.equals(ButtonString[2])) { // delete
-			DeleteData();
+			deleteData();
 		} else if (comm.equals(ButtonString[3])) { // commit
-			CommitData();
+			commitData();
 		} else if (comm.equals(ButtonString[4])) { // reset
-			ResetData(e);
+			resetData(e);
 		} else if (comm.equals(ButtonString[5])) { // check
-			CheckData(e);
+			checkData(e);
 		}
 	}
 
-	public void OpenFile(File file) {
+	public void openFile(File file) {
 		FileReader fr = null;
 		try {
 			fr = new FileReader(file);
@@ -547,7 +547,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		}
 		jp_table_top_left.remove(jsp_table1);
 		jp_table_top_right.remove(jsp_table2);
-		Table_Data();
+		tableData();
 		jp_table_top_left.add(jsp_table1, BorderLayout.CENTER);
 		jp_table_top_right.add(jsp_table2, BorderLayout.CENTER);
 		jp_table_top_left.validate();
@@ -574,7 +574,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		}
 	}
 
-	public void OpenData() {
+	public void openData() {
 		String Open_path = "res/" + username + "/TeamList/" + jcb.getSelectedItem().toString() + ".md";
 		File file = new File(Open_path);
 		if (!file.getParentFile().exists()) {
@@ -588,16 +588,16 @@ public class TeamEdit extends JFrame implements ActionListener {
 				int a = JOptionPane.showConfirmDialog(jf, // 如果为null，此框架显示在中央，为jf则显示为jf的中央
 						"Do you want to commit current task ?", "Warnning", JOptionPane.YES_NO_CANCEL_OPTION);
 				if (a == JOptionPane.YES_OPTION) {
-					CommitData();
+					commitData();
 					if (toCommit == true) {
-						OpenFile(file);
+						openFile(file);
 					}
 				} else if (a == JOptionPane.NO_OPTION) {
-					OpenFile(file);
+					openFile(file);
 				} else if (a == JOptionPane.CANCEL_OPTION) {
 				}
 			} else {
-				OpenFile(file);
+				openFile(file);
 			}
 		}
 	}
@@ -606,7 +606,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		int a = JOptionPane.showConfirmDialog(jf, // 如果为null，此框架显示在中央，为jf则显示为jf的中央
 				"Do you want to commit current task ?", "Warnning", JOptionPane.YES_NO_CANCEL_OPTION);
 		if (a == JOptionPane.YES_OPTION) {
-			CommitData();
+			commitData();
 			if (toCommit == true) {
 				jf.dispose();
 				new TeamEdit(username);
@@ -619,7 +619,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void DeleteData() {
+	public void deleteData() {
 		String Delete_path = "res/" + username + "/TeamList/" + jcb.getSelectedItem().toString() + ".md";
 		File file = new File(Delete_path);
 		if (!file.getParentFile().exists()) {
@@ -647,7 +647,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void CommitData() {
+	public void commitData() {
 		StringName = jtfName.getText();
 		StringDate = jtfDate.getText();
 		StringTime = jtfTime.getText();
@@ -789,7 +789,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		}
 	}
 
-	public void ResetData(ActionEvent e) {
+	public void resetData(ActionEvent e) {
 		if (e.getSource() == jb_Reset1) {
 			for (int i = 0; i < 5; i++) {
 				for (int j = 1; j <= 4; j++) {
@@ -817,7 +817,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		}
 	}
 
-	public void CheckData(ActionEvent e) {
+	public void checkData(ActionEvent e) {
 		if (e.getSource() == jb_check1) {
 			String tableString1 = new String("");
 			boolean isExit = true;
@@ -858,8 +858,8 @@ public class TeamEdit extends JFrame implements ActionListener {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void Table_Data() {
-		model1 = new Table_Model1();
+	public void tableData() {
+		model1 = new TableModel1();
 		table1 = new JTable(model1) { // 设置jtable的单元格为透明的
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -893,7 +893,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 		jsp_table1.setViewportView(table1);// 装载表格
 		jsp_table1.setPreferredSize(new Dimension(400, 105));
 
-		model2 = new Table_Model1();
+		model2 = new TableModel1();
 		table2 = new JTable(model2) { // 设置jtable的单元格为透明的
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component c = super.prepareRenderer(renderer, row, column);
@@ -1137,7 +1137,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 					// 刷新表格
 					jp_table_top_left.remove(jsp_table1);
 					jp_table_top_right.remove(jsp_table2);
-					Table_Data();
+					tableData();
 					jp_table_top_left.add(jsp_table1, BorderLayout.CENTER);
 					jp_table_top_right.add(jsp_table2, BorderLayout.CENTER);
 					jp_table_top_left.validate();
@@ -1200,7 +1200,7 @@ public class TeamEdit extends JFrame implements ActionListener {
 					// 刷新表格
 					jp_table_top_left.remove(jsp_table1);
 					jp_table_top_right.remove(jsp_table2);
-					Table_Data();
+					tableData();
 					jp_table_top_left.add(jsp_table1, BorderLayout.CENTER);
 					jp_table_top_right.add(jsp_table2, BorderLayout.CENTER);
 					jp_table_top_left.validate();

@@ -146,7 +146,7 @@ public class Main extends JFrame implements ActionListener {
 		} else if (comm.equals(ButtonString[1])) {
 			new TeamEdit(username);
 		} else if (comm.equals(ButtonString[2])) {
-			new CheckList(username);
+			new checkList(username);
 		}
 	}
 }

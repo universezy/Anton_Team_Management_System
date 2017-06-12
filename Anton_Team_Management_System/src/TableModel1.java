@@ -2,7 +2,7 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-class Table_Model1 extends AbstractTableModel {
+class TableModel1 extends AbstractTableModel {
 		private static final long serialVersionUID = -3094977414157589758L;
 		private String[] title_name = { "", "Captain", "Member", "Member", "Member" };
 
@@ -10,7 +10,7 @@ class Table_Model1 extends AbstractTableModel {
 		private Vector content = null;
 
 		@SuppressWarnings("rawtypes")
-		public Table_Model1() {
+		public TableModel1() {
 			content = new Vector();
 		}
 

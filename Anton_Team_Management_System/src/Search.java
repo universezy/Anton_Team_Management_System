@@ -45,7 +45,7 @@ public class Search extends JFrame implements ActionListener {
 		jf = new JFrame("Search : " + StringSearch);
 		jf.setLayout(new BorderLayout());
 
-		Table_Data();
+		tableData();
 
 		jp_s.add(scroll);
 		jf.add(jp_s, BorderLayout.SOUTH);
@@ -68,7 +68,7 @@ public class Search extends JFrame implements ActionListener {
 
 	}
 
-	public void Table_Data() {
+	public void tableData() {
 		// 采用自定义数据模型
 		model = new MyTableModel();
 		table = new JTable(model);
@@ -503,7 +503,7 @@ public class Search extends JFrame implements ActionListener {
 					e7.printStackTrace();
 				}
 				jp_s.remove(scroll);
-				Table_Data();
+				tableData();
 				jp_s.add(scroll);
 				jp_s.validate();
 				jf.validate();
