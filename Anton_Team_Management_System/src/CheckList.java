@@ -36,7 +36,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 @SuppressWarnings("serial")
-public class checkList extends JFrame implements ActionListener {
+public class CheckList extends JFrame implements ActionListener {
 	private JFrame jf;
 	public String username;
 	private int jf_width = 1150, jf_height = 620, jt_width = 490, jt_height = 125, rowHeight = 20;
@@ -71,7 +71,7 @@ public class checkList extends JFrame implements ActionListener {
 		}
 	}
 
-	public checkList(String string_username) {
+	public CheckList(String string_username) {
 		username = string_username;
 
 		// Êý¾Ý×°ÔØ
@@ -710,7 +710,7 @@ public class checkList extends JFrame implements ActionListener {
 				System.out.println("Delete : " + Delete_path);
 				file.delete();
 				jf.dispose();
-				new checkList(username);
+				new CheckList(username);
 			} else if (a == JOptionPane.CANCEL_OPTION) {
 
 			}
