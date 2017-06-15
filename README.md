@@ -12,7 +12,7 @@ At first, I used **txt** to schedule member, but then I thought it crude. So I t
 
 ----
 
-## Screenshoot
+## Screenshot
 
 ### **Register**
 
