@@ -34,17 +34,17 @@ At first, I used **txt** to schedule member, but then I thought it crude. So I t
 
 ### **memberList**
 
-***Here you can scan your team members with their details and modify them. Also you can add a new member or remove a old member.***
+***Here you can scan your team members with their details and modify them. Also you can add a new member or remove an old member.***
 
 ![](https://github.com/13608089849/Anton_Team_Management_System/blob/master/image/memberList.png)
 
 ### **editTeam**
 
-***This is the most important interface for commander to edit a team with detailed information, and then members should be scheduled by it.***
+***This is the most important interface for commander to edit a team with detailed information, and then members should be scheduled by according to it.***
 ![](https://github.com/13608089849/Anton_Team_Management_System/blob/master/image/editTeam.png)
 
 ### **checkList**
 
-***Commader can check every schedule tables here, even upload your screenshoot after defrating huge turtle.***
+***Commader can check every schedule tables here, even upload your screenshoot after defeating huge turtle.***
 
 ![](https://github.com/13608089849/Anton_Team_Management_System/blob/master/image/checkList.png)
